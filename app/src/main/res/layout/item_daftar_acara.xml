@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:padding="@dimen/pembatas_smaller"
+    android:id="@+id/card_view"
+    android:layout_gravity="center"
+    card_view:cardCornerRadius="4dp">
+    <RelativeLayout
+        android:id="@+id/bg_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:background="@android:color/background_dark">
+    <RelativeLayout
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/img_acara"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="@dimen/pembatas_larger"
+            android:layout_height="@dimen/pembatas_larger"
+            android:text="A"
+            android:textAlignment="center"
+            android:background="@color/colorAccent"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:layout_width="@dimen/pembatas_larger"
+            android:layout_height="@dimen/pembatas_larger"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="1dp"
+            android:src="@drawable/ic_fav" />
+
+        <TextView
+            android:id="@+id/title_acara"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_acara"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:padding="@dimen/pembatas_small"
+            android:text="@string/title_acara_default"
+            tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/release_acara"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_acara"
+            android:layout_toEndOf="@id/title_acara"
+            android:textSize="10sp"
+            android:textAlignment="viewEnd"
+            android:padding="@dimen/pembatas_small"
+            android:text="@string/tgl_release_default"
+            tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/kategori_acara"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/pembatas_smaller"
+            android:text="@string/kategori_default"
+            android:textSize="10sp"
+            android:layout_below="@id/title_acara"
+            tools:ignore="SmallSp" />
+        <TextView
+            android:id="@+id/overview_acara"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/pembatas_smaller"
+            android:layout_below="@id/kategori_acara"
+            android:text="@string/overview_default"
+            android:textSize="9sp"
+            tools:ignore="SmallSp" />
+    </RelativeLayout>
+   </RelativeLayout>
+</androidx.cardview.widget.CardView>
