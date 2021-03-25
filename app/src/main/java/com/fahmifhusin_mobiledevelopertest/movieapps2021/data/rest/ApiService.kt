@@ -6,9 +6,11 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
-//    @GET("3/discover/movie?api_key=" + ApiClient.API_KEY)
-//    fun getMovies(): Call<MutableList<RequestAcara>>
+    @GET("3/discover/movie?api_key=" + ApiClient.API_KEY)
+    fun getMovies(): Call<Results>
+//@GET("users")
+////@GET("movies")
+//fun getMovies(): Call<MutableList<Results>>
 @GET("users")
-fun getUsers(): Call<MutableList<Results>>
-
+fun getSeries(): Call<MutableList<Results>>
 }

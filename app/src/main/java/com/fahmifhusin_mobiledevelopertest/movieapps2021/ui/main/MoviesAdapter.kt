@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.RequestAcara
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.Results
 
-class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView.Adapter<MoviesAdapter.DaftarMoviesHolder>() {
+class MoviesAdapter(private var listMovies: MutableList<RequestAcara>) : RecyclerView.Adapter<MoviesAdapter.DaftarMoviesHolder>() {
+   lateinit var movieResult:List<RequestAcara>
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,13 +26,13 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: MoviesAdapter.DaftarMoviesHolder, position: Int) {
-            val acaraMovies = listMovies.get(position)
-            holder.titleAcara.setText(acaraMovies.toString())
+        holder.titleMovie.setText("UHUY")
     }
+
 
     override fun getItemCount() = listMovies.size
 
     inner class DaftarMoviesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleAcara:TextView = itemView.findViewById(R.id.title_acara)
+        val titleMovie:TextView = itemView.findViewById(R.id.title_acara)
     }
 }

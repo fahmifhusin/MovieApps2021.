@@ -4,26 +4,26 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.Repository
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.RequestAcara
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.Results
-import com.fahmifhusin_mobiledevelopertest.movieapps2021.util.Utility.hideProgressBar
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.util.Utility.isInternetAvailable
 
 class MoviesViewModel(private val context: Context):ViewModel() {
 
-    private var listData = MutableLiveData<ArrayList<Results>>()
+    private var viewModelMoviesData = MutableLiveData<ArrayList<RequestAcara>>()
 
     init{
         val repository : Repository by lazy {
             Repository
         }
         if(context.isInternetAvailable()) {
-            listData = repository.getMutableLiveData(context)
-            hideProgressBar()
+            viewModelMoviesData = repository.getMutableLiveDataMovie(context)
+//            hideProgressBar()
         }
     }
 
-    fun getData() : MutableLiveData<ArrayList<Results>> {
-        return listData
+    fun getMoviesViewData() : MutableLiveData<ArrayList<RequestAcara>> {
+        return viewModelMoviesData
     }
 
 
