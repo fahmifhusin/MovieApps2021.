@@ -9,6 +9,11 @@
     <string name="movies">Movies</string>
     <string name="tv">Series</string>
     <string name="sort_default">Sort By</string>
+    <string name="msg_add_favorite">Ingin Menyimpan ke Favorit? </string>
+    <string name="ya">Ya</string>
+    <string name="msg_abort_add_dialog">Batal Ditambah</string>
+    <string name="tidak">Tidak</string>
+    <string name="msg_add_menu_continue">Ditambah ke Favorit</string>
     <string-array name="sort_by">
         <item>Name Title</item>
         <item>Genre</item>

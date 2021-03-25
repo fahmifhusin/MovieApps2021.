@@ -24,6 +24,7 @@
             android:id="@+id/img_acara"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:scaleType="fitXY"
             android:background="@android:color/darker_gray"/>
 
         <TextView
@@ -33,8 +34,10 @@
             android:layout_marginStart="@dimen/pembatas_smaller"
             android:layout_marginTop="@dimen/pembatas_smaller"
             android:text="A"
+            android:textStyle="bold"
             android:textAlignment="center"
-            android:background="@color/colorAccent"
+            android:textColor="@android:color/holo_orange_light"
+            android:background="@color/colorPrimaryDark"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
@@ -87,10 +90,11 @@
             android:id="@+id/overview_acara"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/pembatas_smaller"
+            android:padding="@dimen/pembatas_small"
             android:layout_below="@id/kategori_acara"
             android:text="@string/overview_default"
             android:textSize="9sp"
+            android:maxLines="5"
             tools:ignore="SmallSp" />
     </RelativeLayout>
    </RelativeLayout>

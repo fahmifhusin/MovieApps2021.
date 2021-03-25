@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.RequestAcara
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.Results
-import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.MoviesViewModel
-import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.MoviesViewModelFactory
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.SeriesViewModel
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.SeriesViewModelFactory
 

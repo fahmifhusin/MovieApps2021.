@@ -1,7 +1,6 @@
 package com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
-import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.RequestAcara
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.Results
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.MoviesViewModelFactory
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.MoviesViewModel
@@ -21,7 +19,7 @@ class MoviesFragment: Fragment() {
     lateinit var rvMovies: RecyclerView
     lateinit var adapterMovies: MoviesAdapter
     lateinit var layoutManager: RecyclerView.LayoutManager
-    lateinit var dataResult:MutableList<RequestAcara>
+    lateinit var dataResult:MutableList<Results>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +41,8 @@ class MoviesFragment: Fragment() {
 
         val moviesViewModel = ViewModelProviders.of(this,
             context?.let { MoviesViewModelFactory(it) }).get(MoviesViewModel::class.java)
-        moviesViewModel.getMoviesViewData().observe(this,object: Observer<ArrayList<RequestAcara>> {
-            override fun onChanged(t: ArrayList<RequestAcara>) {
+        moviesViewModel.getMoviesViewData().observe(this,object: Observer<ArrayList<Results>> {
+            override fun onChanged(t: ArrayList<Results>) {
                 dataResult.clear()
                 t.let { dataResult.addAll(it) }
                 adapterMovies.notifyDataSetChanged()

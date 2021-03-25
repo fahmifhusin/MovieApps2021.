@@ -16,12 +16,6 @@ object ApiClient{
         const val API_KEY = "d34a01dac0385df0afc746a68c7d8759"
         const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
         //handle connection
-//        private val gson : Gson by lazy {
-//            GsonBuilder().setLenient().create()
-//        }
-//    private val httpClient : OkHttpClient by lazy {
-//        OkHttpClient.Builder().build()
-//    }
 
     private val retrofit : Retrofit by lazy {
         val loggingInterceptor = HttpLoggingInterceptor()
