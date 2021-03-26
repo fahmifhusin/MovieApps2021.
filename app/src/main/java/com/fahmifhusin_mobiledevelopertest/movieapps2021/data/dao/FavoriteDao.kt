@@ -18,7 +18,7 @@ interface FavoriteDao {
     @Query("SELECT * FROM favorite ORDER BY rating_item ASC")
     fun getDaftarFavSortRating(): LiveData<List<FavoritePojo>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFav(vararg menu: FavoritePojo)
     @Delete
     fun deleteById(menu:FavoritePojo)

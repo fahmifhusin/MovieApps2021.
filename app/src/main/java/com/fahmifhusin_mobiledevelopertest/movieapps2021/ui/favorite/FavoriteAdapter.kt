@@ -16,44 +16,17 @@ import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
 
 class FavoriteAdapter(private var listFavorite: List<FavoritePojo>) : RecyclerView.Adapter<FavoriteAdapter.DaftarFavoriteHolder>() {
 
-    lateinit var dataFav: FavoritePojo
-    lateinit var db:MovieAppDB
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaftarFavoriteHolder {
         val mView : View = LayoutInflater.from(parent.getContext()).inflate(
             R.layout.item_daftar_acara,
             parent, false
         )
-        mView.setOnClickListener({
-            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(parent.context)
-            builder.setCancelable(true)
-            builder.setMessage(R.string.msg_rm_favorite)
-            builder.setPositiveButton(
-                R.string.ya,
-                { dialog, which ->
-                    Toast.makeText(parent.context, R.string.msg_rm_fav_continue, Toast.LENGTH_SHORT).show()
-                db = Room.databaseBuilder(
-                    parent.context,
-                    MovieAppDB::class.java, "movie_dua_satu"
-                ).allowMainThreadQueries().build()
-                 db.showFavoriteAcara().deleteById(dataFav)
-                 (parent.context as Activity).finish()
-                 parent.context.startActivity(Intent(parent.context, FavoriteActivity::class.java))
-                })
-            builder.setNegativeButton(
-                R.string.tidak,
-                { dialog, which ->
-                    Toast.makeText(parent.context, R.string.msg_abort_rm_fav_dialog, Toast.LENGTH_SHORT).show()
-                })
-            val dialog: android.app.AlertDialog? = builder.create()
-            dialog?.show()
-        })
         return DaftarFavoriteHolder(mView)
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: DaftarFavoriteHolder, position: Int) {
-        dataFav = listFavorite.get(position)
+        val dataFav: FavoritePojo = listFavorite.get(position)
         Glide.with(holder.itemView.context)
             .load(dataFav.imgItem)
             .override(200, 200)
@@ -73,12 +46,37 @@ class FavoriteAdapter(private var listFavorite: List<FavoritePojo>) : RecyclerVi
         }
         holder.bgCategoryFav.setBackgroundColor(R.color.ungu)
         holder.kategoriFav.setText(dataFav.kategoriItem)
+        holder.bgItemFav.setOnClickListener({
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(holder.itemView.context)
+            builder.setCancelable(true)
+            builder.setMessage(R.string.msg_rm_favorite)
+            builder.setPositiveButton(
+                R.string.ya,
+                { dialog, which ->
+                    Toast.makeText(holder.itemView.context, R.string.msg_rm_fav_continue, Toast.LENGTH_SHORT).show()
+                    val db:MovieAppDB = Room.databaseBuilder(
+                        holder.itemView.context,
+                        MovieAppDB::class.java, "movie_dua_satu"
+                    ).allowMainThreadQueries().build()
+                    db.showFavoriteAcara().deleteById(dataFav)
+//                 (parent.context as Activity).finish()
+//                 parent.context.startActivity(Intent(parent.context, FavoriteActivity::class.java))
+                })
+            builder.setNegativeButton(
+                R.string.tidak,
+                { dialog, which ->
+                    Toast.makeText(holder.itemView.context, R.string.msg_abort_rm_fav_dialog, Toast.LENGTH_SHORT).show()
+                })
+            val dialog: android.app.AlertDialog? = builder.create()
+            dialog?.show()
+        })
     }
 
     override fun getItemCount() = listFavorite.size
 
     inner class DaftarFavoriteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bgCategoryFav: RelativeLayout = itemView.findViewById(R.id.bg_category)
+        val bgItemFav:RelativeLayout = itemView.findViewById(R.id.item_acara)
         val isFav: ImageView = itemView.findViewById(R.id.acara_isfav)
         val imgFav: ImageView = itemView.findViewById(R.id.img_acara)
         val ratingFav: TextView = itemView.findViewById(R.id.rating_acara)

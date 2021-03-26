@@ -10,4 +10,25 @@ import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
 
 abstract class MovieAppDB :RoomDatabase(){
 abstract fun showFavoriteAcara(): FavoriteDao
+ companion object {
+
+  @Volatile
+  private var INSTANCE: MovieAppDB? = null
+
+  fun getDatabase(context: Context): MovieAppDB? {
+   if (INSTANCE == null) {
+    synchronized(MovieAppDB::class.java) {
+     if (INSTANCE == null) {
+      INSTANCE = Room.databaseBuilder(
+       context.applicationContext,
+       MovieAppDB::class.java, "movie_dua_satu"
+      )
+       .build()
+     }
+    }
+   }
+   return INSTANCE
+  }
+ }
+
  }

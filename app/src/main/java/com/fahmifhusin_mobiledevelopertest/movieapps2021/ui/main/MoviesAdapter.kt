@@ -20,9 +20,6 @@ import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.rest.ApiClient.IMA
 
 class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView.Adapter<MoviesAdapter.DaftarMoviesHolder>() {
 
-    lateinit var dataMovie:Results
-    lateinit var db:MovieAppDB
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -31,44 +28,13 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
             R.layout.item_daftar_acara,
             parent, false
         )
-        mView.setOnClickListener({
-            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(parent.context)
-            builder.setCancelable(true)
-            builder.setMessage(R.string.msg_add_favorite)
-            builder.setPositiveButton(R.string.ya,
-                { dialog, which ->
-                  db = Room.databaseBuilder(
-                    parent.getContext(),
-                    MovieAppDB::class.java, "movie_dua_satu"
-                ).allowMainThreadQueries().build()
-                    val idParse = Integer.parseInt(dataMovie.getId())
-                        val dataFavBaru =
-                            FavoritePojo(
-                            idParse,
-                            IMAGE_URL+dataMovie.getPoster(),
-                            dataMovie.getTitle()!!,
-                            dataMovie.getVote()!!,
-                            "unknown",
-                            dataMovie.getRelease()!!,
-                            dataMovie.getOverView()!!
-                        )
-                        db.showFavoriteAcara().insertFav(dataFavBaru)
-                    Log.d("dataBaru", dataFavBaru.toString())
-                    Toast.makeText(parent.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
-                })
-            builder.setNegativeButton(R.string.tidak,
-                { dialog, which ->
-                    Toast.makeText(parent.context, R.string.msg_abort_add_dialog, Toast.LENGTH_SHORT).show()
-                })
-            val dialog: android.app.AlertDialog? = builder.create()
-            dialog?.show()
-        })
         return DaftarMoviesHolder(mView)
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MoviesAdapter.DaftarMoviesHolder, position: Int) {
-        dataMovie = listMovies.get(position)
+
+        val dataMovie:Results = listMovies.get(position)
             Glide.with(holder.itemView.context)
                 .load(IMAGE_URL+dataMovie.getPoster())
             .override(200, 200)
@@ -88,6 +54,38 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
         }
         holder.bgCategoryMovie.setBackgroundColor(R.color.ungu)
         holder.kategoriMovie.setText("Unknown")
+        holder.bgItemMovie.setOnClickListener({
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(holder.itemView.context)
+            builder.setCancelable(true)
+            builder.setMessage(R.string.msg_add_favorite)
+            builder.setPositiveButton(R.string.ya,
+                { dialog, which ->
+                    val db:MovieAppDB = Room.databaseBuilder(
+                        holder.itemView.context,
+                        MovieAppDB::class.java, "movie_dua_satu"
+                    ).allowMainThreadQueries().build()
+                    val idParse = Integer.parseInt(dataMovie.getId())
+                    val dataFavBaru =
+                        FavoritePojo(
+                            idParse,
+                            IMAGE_URL+dataMovie.getPoster(),
+                            dataMovie.getTitle()!!,
+                            dataMovie.getVote()!!,
+                            "unknown",
+                            dataMovie.getRelease()!!,
+                            dataMovie.getOverView()!!
+                        )
+                    db.showFavoriteAcara().insertFav(dataFavBaru)
+                    Log.d("dataBaru", dataFavBaru.toString())
+                    Toast.makeText(holder.itemView.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
+                })
+            builder.setNegativeButton(R.string.tidak,
+                { dialog, which ->
+                    Toast.makeText(holder.itemView.context, R.string.msg_abort_add_dialog, Toast.LENGTH_SHORT).show()
+                })
+            val dialog: android.app.AlertDialog? = builder.create()
+            dialog?.show()
+        })
      }
 
 
@@ -95,6 +93,7 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
 
     inner class DaftarMoviesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bgCategoryMovie:RelativeLayout = itemView.findViewById(R.id.bg_category)
+        val bgItemMovie:RelativeLayout = itemView.findViewById(R.id.item_acara)
         val movieisFav:ImageView = itemView.findViewById(R.id.acara_isfav)
         val imgMovie:ImageView = itemView.findViewById(R.id.img_acara)
         val ratingMovie:TextView = itemView.findViewById(R.id.rating_acara)

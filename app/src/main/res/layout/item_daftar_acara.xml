@@ -15,6 +15,7 @@
         android:gravity="center"
         tools:background="@android:color/background_dark">
     <RelativeLayout
+        android:id="@+id/item_acara"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/pembatas_small"

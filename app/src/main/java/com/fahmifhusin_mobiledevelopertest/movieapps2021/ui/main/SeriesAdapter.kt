@@ -19,8 +19,6 @@ import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.rest.ApiClient
 
 class SeriesAdapter(private var listSeries: MutableList<Results>) : RecyclerView.Adapter<SeriesAdapter.DaftarSeriesHolder>() {
 
-    lateinit var db:MovieAppDB
-    lateinit var dataSerie:Results
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,44 +28,15 @@ class SeriesAdapter(private var listSeries: MutableList<Results>) : RecyclerView
             R.layout.item_daftar_acara,
             parent,
             false
+        //cuma boleh seonclick kalo intent disini
         )
-        mView.setOnClickListener({
-            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(parent.context)
-            builder.setCancelable(true)
-            builder.setMessage(R.string.msg_add_favorite)
-            builder.setPositiveButton(R.string.ya,
-                { dialog, which ->
-                    db = Room.databaseBuilder(
-                        parent.context,
-                        MovieAppDB::class.java, "movie_dua_satu"
-                    ).allowMainThreadQueries().build()
-                    val idParse = Integer.parseInt(dataSerie.getId())
-                    val dataFavBaru =
-                        FavoritePojo(
-                        idParse,
-                        ApiClient.IMAGE_URL +dataSerie.getPoster(),
-                        dataSerie.getName()!!,
-                        dataSerie.getVote()!!,
-                        "unknown",
-                        dataSerie.getFirstAir()!!,
-                        dataSerie.getOverView()!!
-                    )
-                    db.showFavoriteAcara().insertFav(dataFavBaru)
-                    Toast.makeText(parent.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
-                })
-            builder.setNegativeButton(R.string.tidak,
-                { dialog, which ->
-                    Toast.makeText(parent.context, R.string.msg_abort_add_dialog, Toast.LENGTH_SHORT).show()
-                })
-            val dialog: android.app.AlertDialog? = builder.create()
-            dialog?.show()
-        })
         return DaftarSeriesHolder(mView)
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: SeriesAdapter.DaftarSeriesHolder, position: Int) {
-        dataSerie = listSeries.get(position)
+
+        val dataSerie:Results = listSeries.get(position)
         Glide.with(holder.itemView.context)
             .load(ApiClient.IMAGE_URL +dataSerie.getPoster())
             .override(200, 200)
@@ -87,6 +56,37 @@ class SeriesAdapter(private var listSeries: MutableList<Results>) : RecyclerView
         }
         holder.bgCategorySerie.setBackgroundColor(R.color.ungu)
         holder.kategoriSerie.setText("Unknown")
+        holder.bgItemSeries.setOnClickListener({
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(holder.itemView.context)
+            builder.setCancelable(true)
+            builder.setMessage(R.string.msg_add_favorite)
+            builder.setPositiveButton(R.string.ya,
+                { dialog, which ->
+                    val db:MovieAppDB = Room.databaseBuilder(
+                        holder.itemView.context,
+                        MovieAppDB::class.java, "movie_dua_satu"
+                    ).allowMainThreadQueries().build()
+                    val idParse = Integer.parseInt(dataSerie.getId())
+                    val dataFavBaru =
+                        FavoritePojo(
+                            idParse,
+                            ApiClient.IMAGE_URL +dataSerie.getPoster(),
+                            dataSerie.getName()!!,
+                            dataSerie.getVote()!!,
+                            "unknown",
+                            dataSerie.getFirstAir()!!,
+                            dataSerie.getOverView()!!
+                        )
+                    db.showFavoriteAcara().insertFav(dataFavBaru)
+                    Toast.makeText(holder.itemView.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
+                })
+            builder.setNegativeButton(R.string.tidak,
+                { dialog, which ->
+                    Toast.makeText(holder.itemView.context, R.string.msg_abort_add_dialog, Toast.LENGTH_SHORT).show()
+                })
+            val dialog: android.app.AlertDialog? = builder.create()
+            dialog?.show()
+        })
     }
 
 
@@ -94,6 +94,7 @@ class SeriesAdapter(private var listSeries: MutableList<Results>) : RecyclerView
 
     inner class DaftarSeriesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bgCategorySerie: RelativeLayout = itemView.findViewById(R.id.bg_category)
+        val bgItemSeries:RelativeLayout = itemView.findViewById(R.id.item_acara)
         val imgSerie: ImageView = itemView.findViewById(R.id.img_acara)
         val serieisFav: ImageView = itemView.findViewById(R.id.acara_isfav)
         val titleSerie:TextView = itemView.findViewById(R.id.title_acara)
