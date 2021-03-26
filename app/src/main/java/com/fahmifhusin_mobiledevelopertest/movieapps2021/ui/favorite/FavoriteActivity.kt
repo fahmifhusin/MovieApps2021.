@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
-import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.database.MovieAppDB
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.viewmodel.FavoriteViewModel
 

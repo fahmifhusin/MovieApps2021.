@@ -6,7 +6,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.bumptech.glide.Glide
@@ -47,25 +50,34 @@ class FavoriteAdapter(private var listFavorite: List<FavoritePojo>) : RecyclerVi
         holder.bgCategoryFav.setBackgroundColor(R.color.ungu)
         holder.kategoriFav.setText(dataFav.kategoriItem)
         holder.bgItemFav.setOnClickListener({
-            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(holder.itemView.context)
+            val builder: android.app.AlertDialog.Builder =
+                android.app.AlertDialog.Builder(holder.itemView.context)
             builder.setCancelable(true)
             builder.setMessage(R.string.msg_rm_favorite)
             builder.setPositiveButton(
                 R.string.ya,
                 { dialog, which ->
-                    Toast.makeText(holder.itemView.context, R.string.msg_rm_fav_continue, Toast.LENGTH_SHORT).show()
-                    val db:MovieAppDB = Room.databaseBuilder(
+                    Toast.makeText(
+                        holder.itemView.context,
+                        R.string.msg_rm_fav_continue,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val db: MovieAppDB = Room.databaseBuilder(
                         holder.itemView.context,
                         MovieAppDB::class.java, "movie_dua_satu"
                     ).allowMainThreadQueries().build()
                     db.showFavoriteAcara().deleteById(dataFav)
-//                 (parent.context as Activity).finish()
-//                 parent.context.startActivity(Intent(parent.context, FavoriteActivity::class.java))
+                 (holder.itemView.context as Activity).finish()
+                 holder.itemView.context.startActivity(Intent(holder.itemView.context, FavoriteActivity::class.java))
                 })
             builder.setNegativeButton(
                 R.string.tidak,
                 { dialog, which ->
-                    Toast.makeText(holder.itemView.context, R.string.msg_abort_rm_fav_dialog, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.itemView.context,
+                        R.string.msg_abort_rm_fav_dialog,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 })
             val dialog: android.app.AlertDialog? = builder.create()
             dialog?.show()
