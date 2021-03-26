@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#BABABA</color>
     <color name="ungu">#BF00FF</color>
+    <color name="merah">#FF0000</color>
+    <color name="biru">#0000FF</color>
+    <color name="kuning">#FFFF00</color>
+    <color name="hijau">#00FF00</color>
 </resources>

@@ -49,6 +49,15 @@ class FavoriteAdapter(private var listFavorite: List<FavoritePojo>) : RecyclerVi
         }
         holder.bgCategoryFav.setBackgroundColor(R.color.ungu)
         holder.kategoriFav.setText(dataFav.kategoriItem)
+        val db: MovieAppDB = Room.databaseBuilder(
+            holder.itemView.context,
+            MovieAppDB::class.java, "movie_dua_satu"
+        ).allowMainThreadQueries().build()
+        if (db.showFavoriteAcara().isFavorite(dataFav.idAcara)==1) {
+            holder.isFav.setImageResource(R.drawable.ic__bookmark_active) }
+        else{
+            holder.isFav.setImageResource(R.drawable.ic__bookmark_inactive)
+        }
         holder.bgItemFav.setOnClickListener({
             val builder: android.app.AlertDialog.Builder =
                 android.app.AlertDialog.Builder(holder.itemView.context)
@@ -62,12 +71,9 @@ class FavoriteAdapter(private var listFavorite: List<FavoritePojo>) : RecyclerVi
                         R.string.msg_rm_fav_continue,
                         Toast.LENGTH_SHORT
                     ).show()
-                    val db: MovieAppDB = Room.databaseBuilder(
-                        holder.itemView.context,
-                        MovieAppDB::class.java, "movie_dua_satu"
-                    ).allowMainThreadQueries().build()
+                    db.showFavoriteAcara().isNotFavorite(dataFav.idAcara)
                     db.showFavoriteAcara().deleteById(dataFav)
-                 (holder.itemView.context as Activity).finish()
+                    (holder.itemView.context as Activity).finish()
                  holder.itemView.context.startActivity(Intent(holder.itemView.context, FavoriteActivity::class.java))
                 })
             builder.setNegativeButton(

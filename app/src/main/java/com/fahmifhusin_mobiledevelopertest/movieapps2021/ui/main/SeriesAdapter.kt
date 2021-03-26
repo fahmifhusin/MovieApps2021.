@@ -56,17 +56,23 @@ class SeriesAdapter(private var listSeries: MutableList<Results>) : RecyclerView
         }
         holder.bgCategorySerie.setBackgroundColor(R.color.ungu)
         holder.kategoriSerie.setText("Unknown")
+        val db:MovieAppDB = Room.databaseBuilder(
+            holder.itemView.context,
+            MovieAppDB::class.java, "movie_dua_satu"
+        ).allowMainThreadQueries().build()
+        val idParse = Integer.parseInt(dataSerie.getId())
+        db.showFavoriteAcara().isNotFavorite(idParse)
+        if (db.showFavoriteAcara().isFavorite(idParse)==1) {
+            holder.serieisFav.setImageResource(R.drawable.ic__bookmark_active) }
+        else{
+            holder.serieisFav.setImageResource(R.drawable.ic__bookmark_inactive)
+        }
         holder.bgItemSeries.setOnClickListener({
             val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(holder.itemView.context)
             builder.setCancelable(true)
             builder.setMessage(R.string.msg_add_favorite)
             builder.setPositiveButton(R.string.ya,
                 { dialog, which ->
-                    val db:MovieAppDB = Room.databaseBuilder(
-                        holder.itemView.context,
-                        MovieAppDB::class.java, "movie_dua_satu"
-                    ).allowMainThreadQueries().build()
-                    val idParse = Integer.parseInt(dataSerie.getId())
                     val dataFavBaru =
                         FavoritePojo(
                             idParse,
@@ -78,6 +84,12 @@ class SeriesAdapter(private var listSeries: MutableList<Results>) : RecyclerView
                             dataSerie.getOverView()!!
                         )
                     db.showFavoriteAcara().insertFav(dataFavBaru)
+                    db.showFavoriteAcara().isFavorite(idParse)
+                    if (db.showFavoriteAcara().isFavorite(idParse)==1) {
+                        holder.serieisFav.setImageResource(R.drawable.ic__bookmark_active) }
+                    else{
+                        holder.serieisFav.setImageResource(R.drawable.ic__bookmark_inactive)
+                    }
                     Toast.makeText(holder.itemView.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
                 })
             builder.setNegativeButton(R.string.tidak,

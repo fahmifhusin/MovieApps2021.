@@ -6,8 +6,7 @@
     android:layout_height="300dp"
     android:padding="@dimen/pembatas_default"
     android:id="@+id/card_view"
-    android:layout_gravity="center"
-    card_view:cardCornerRadius="4dp">
+    android:layout_gravity="center">
     <RelativeLayout
         android:id="@+id/bg_category"
         android:layout_width="match_parent"
@@ -48,7 +47,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/pembatas_smaller"
             android:layout_marginTop="@dimen/pembatas_smaller"
-            android:src="@drawable/ic_fav" />
+            android:src="@drawable/ic__bookmark_inactive" />
 <LinearLayout
     android:id="@+id/title_tgl_layout"
     android:layout_width="match_parent"

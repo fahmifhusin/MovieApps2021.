@@ -13,7 +13,7 @@ import java.io.Serializable
 data class FavoritePojo(
     //membuat tabel daftar menu
     @PrimaryKey
-    @ColumnInfo(name = "id") @NonNull var id_makanan: Int,
+    @ColumnInfo(name = "id") @NonNull var idAcara: Int,
     @ColumnInfo(name = "image_item") @Nullable var imgItem: String,
     @ColumnInfo(name = "title_item") @NonNull var titleItem: String,
     @ColumnInfo(name = "rating_item") @NonNull var ratingItem: String,

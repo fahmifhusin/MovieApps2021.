@@ -54,17 +54,22 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
         }
         holder.bgCategoryMovie.setBackgroundColor(R.color.ungu)
         holder.kategoriMovie.setText("Unknown")
+        val db:MovieAppDB = Room.databaseBuilder(
+            holder.itemView.context,
+            MovieAppDB::class.java, "movie_dua_satu"
+        ).allowMainThreadQueries().build()
+        val idParse = Integer.parseInt(dataMovie.getId())
+        if (db.showFavoriteAcara().isFavorite(idParse)==1) {
+            holder.movieisFav.setImageResource(R.drawable.ic__bookmark_active) }
+        else{
+            holder.movieisFav.setImageResource(R.drawable.ic__bookmark_inactive)
+        }
         holder.bgItemMovie.setOnClickListener({
             val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(holder.itemView.context)
             builder.setCancelable(true)
             builder.setMessage(R.string.msg_add_favorite)
             builder.setPositiveButton(R.string.ya,
                 { dialog, which ->
-                    val db:MovieAppDB = Room.databaseBuilder(
-                        holder.itemView.context,
-                        MovieAppDB::class.java, "movie_dua_satu"
-                    ).allowMainThreadQueries().build()
-                    val idParse = Integer.parseInt(dataMovie.getId())
                     val dataFavBaru =
                         FavoritePojo(
                             idParse,
@@ -77,6 +82,12 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
                         )
                     db.showFavoriteAcara().insertFav(dataFavBaru)
                     Log.d("dataBaru", dataFavBaru.toString())
+                    db.showFavoriteAcara().isFavorite(idParse)
+                    if (db.showFavoriteAcara().isFavorite(idParse)==1) {
+                        holder.movieisFav.setImageResource(R.drawable.ic__bookmark_active) }
+                    else{
+                        holder.movieisFav.setImageResource(R.drawable.ic__bookmark_inactive)
+                    }
                     Toast.makeText(holder.itemView.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
                 })
             builder.setNegativeButton(R.string.tidak,

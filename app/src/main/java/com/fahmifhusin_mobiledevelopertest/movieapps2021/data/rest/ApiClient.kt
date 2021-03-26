@@ -10,9 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient{
     //set url server & key
-        const val BASE_URL = "https://api.themoviedb.org/"
-//      const val BASE_URL = "https://polls.apiblueprint.org/"
-//    private const val BASE_URL: String = "https://jsonplaceholder.typicode.com/"
+    //const val BASE_URL = "https://polls.apiblueprint.org/" - output api 404
+    const val BASE_URL = "https://api.themoviedb.org/"
+    //private const val BASE_URL: String = "https://jsonplaceholder.typicode.com/"
         const val API_KEY = "d34a01dac0385df0afc746a68c7d8759"
         const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
         //handle connection

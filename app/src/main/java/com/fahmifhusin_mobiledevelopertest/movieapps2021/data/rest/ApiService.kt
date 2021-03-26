@@ -10,6 +10,9 @@ interface ApiService {
 //    @Headers("Content-Type:application/json")
 //    @GET("movies")
 //    fun getMovies():Call<RequestAcara>
+//    @Headers("Content-Type:application/json")
+//    @GET("tvs")
+//    fun getMovies():Call<RequestAcara>
     @GET("3/discover/movie?api_key=" + ApiClient.API_KEY)
     fun getMovies(): Call<RequestAcara>
     @GET("3/discover/tv?api_key="+ ApiClient.API_KEY)

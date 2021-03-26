@@ -1,7 +1,6 @@
 package com.fahmifhusin_mobiledevelopertest.movieapps2021.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
 
@@ -18,8 +17,13 @@ interface FavoriteDao {
     @Query("SELECT * FROM favorite ORDER BY rating_item ASC")
     fun getDaftarFavSortRating(): LiveData<List<FavoritePojo>>
 
+    @Query("SELECT EXISTS (SELECT 1 FROM favorite WHERE id=:id)")
+    fun isFavorite(id:Int): Int
+    @Query("SELECT EXISTS (SELECT 0 FROM favorite WHERE id=:id)")
+    fun isNotFavorite(id:Int): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFav(vararg menu: FavoritePojo)
     @Delete
-    fun deleteById(menu:FavoritePojo)
+    fun deleteById(menu: FavoritePojo)
 }
