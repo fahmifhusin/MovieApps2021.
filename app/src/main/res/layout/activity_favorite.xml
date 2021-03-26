@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorite.FavoriteActivity">
 <FrameLayout
+    android:id="@+id/header_sort"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
@@ -25,7 +26,12 @@
         android:entries="@array/sort_by"
         android:padding="@dimen/pembatas_default"
         android:layout_gravity="end"/>
-
 </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_sort"
+        tools:listitem="@layout/item_daftar_acara" />
 
 </RelativeLayout>

@@ -14,6 +14,9 @@
     <string name="msg_abort_add_dialog">Batal Ditambah</string>
     <string name="tidak">Tidak</string>
     <string name="msg_add_menu_continue">Ditambah ke Favorit</string>
+    <string name="msg_rm_favorite">Hapus dari Favorite?</string>
+    <string name="msg_rm_fav_continue">Dihapus dari Favorit</string>
+    <string name="msg_abort_rm_fav_dialog">Batal Dihapus</string>
     <string-array name="sort_by">
         <item>Name Title</item>
         <item>Genre</item>

@@ -1,5 +1,6 @@
 package com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.room.Room.databaseBuilder
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.database.MovieAppDB
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.favorite.FavoriteActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
