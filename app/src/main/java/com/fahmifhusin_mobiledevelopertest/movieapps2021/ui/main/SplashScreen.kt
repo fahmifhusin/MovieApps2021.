@@ -1,4 +1,4 @@
-package com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.intro
+package com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
-import com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.main.MainActivity
 
 
 class SplashScreen : AppCompatActivity() {

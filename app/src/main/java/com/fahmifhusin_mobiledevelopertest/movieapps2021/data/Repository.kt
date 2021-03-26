@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.RequestAcara
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.Results
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.rest.ApiClient
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.util.Utility
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.util.Utility.showErrorToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,8 +24,12 @@ object Repository {
             }
 
             override fun onResponse(call: Call<RequestAcara>, response: Response<RequestAcara>) {
-                dataMovies = response.body()?.getListAcara()!!
-                dataMovies.let { hasil.value = it as ArrayList<Results> }
+                try {
+                    dataMovies = response.body()?.getListAcara()!!
+                    dataMovies.let { hasil.value = it as ArrayList<Results> }
+                }catch (e:Exception){
+                    context.showErrorToast("KONEKSI GAGAL")
+                }
             }
         })
         return hasil

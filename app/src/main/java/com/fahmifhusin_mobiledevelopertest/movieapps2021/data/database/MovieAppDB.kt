@@ -10,5 +10,4 @@ import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
 
 abstract class MovieAppDB :RoomDatabase(){
 abstract fun showFavoriteAcara(): FavoriteDao
-
-    }
+ }

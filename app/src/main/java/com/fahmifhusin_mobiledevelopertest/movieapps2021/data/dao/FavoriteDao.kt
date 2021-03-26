@@ -1,6 +1,7 @@
 package com.fahmifhusin_mobiledevelopertest.movieapps2021.data.dao
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
 
@@ -19,6 +20,6 @@ interface FavoriteDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFav(vararg menu: FavoritePojo)
-    @Query("DELETE FROM favorite WHERE id = :idFav")
-    fun deleteById(idFav:Int)
+    @Delete
+    fun deleteById(menu:FavoritePojo)
 }

@@ -1,8 +1,13 @@
 package com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.favorite
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Spinner
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,6 +17,7 @@ import androidx.room.Room
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.R
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.database.MovieAppDB
 import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.pojo.FavoritePojo
+import com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.main.MainActivity
 
 class FavoriteActivity : AppCompatActivity() {
 
@@ -19,6 +25,7 @@ class FavoriteActivity : AppCompatActivity() {
     lateinit var adapterFavorite: FavoriteAdapter
     lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var db:MovieAppDB
+    lateinit var favSort:Spinner
     var listFav:List<FavoritePojo> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,15 +44,44 @@ class FavoriteActivity : AppCompatActivity() {
         rvFavorite = findViewById(R.id.rv_favorite)
         layoutManager = GridLayoutManager(this, 2)
         rvFavorite.setLayoutManager(layoutManager)
-        //handle list
-        db.showFavoriteAcara().getDaftarFav().observe(this,
-            Observer<List<FavoritePojo>> { dataFav ->
-                adapterFavorite = FavoriteAdapter(dataFav)
-                rvFavorite.setAdapter(adapterFavorite)
-                adapterFavorite.notifyDataSetChanged()
-            })
+        favSort = findViewById(R.id.sort_by_fav)
+//        //handle list
+//        if(favSort.getSelectedItem().equals("Genre")){
+//            db.showFavoriteAcara().getDaftarFavSortGenre().observe(this,
+//                Observer<List<FavoritePojo>> { dataFav ->
+//                    adapterFavorite = FavoriteAdapter(dataFav)
+//                    rvFavorite.setAdapter(adapterFavorite)
+//                    adapterFavorite.notifyDataSetChanged()
+//                })
+//        }
+//        else if(favSort.getSelectedItem().equals("Release")){
+//            db.showFavoriteAcara().getDaftarFavSortRelease().observe(this,
+//                Observer<List<FavoritePojo>> { dataFav ->
+//                    adapterFavorite = FavoriteAdapter(dataFav)
+//                    rvFavorite.setAdapter(adapterFavorite)
+//                    adapterFavorite.notifyDataSetChanged()
+//                    finish()
+//                    startActivity(Intent(this, FavoriteActivity::class.java))
+//                    Log.d("sort_by",favSort.selectedItem.toString())
+//                })
+//        }else if(favSort.getSelectedItem().equals("Rating")){
+//            db.showFavoriteAcara().getDaftarFavSortRating().observe(this,
+//                Observer<List<FavoritePojo>> { dataFav ->
+//                    adapterFavorite = FavoriteAdapter(dataFav)
+//                    rvFavorite.setAdapter(adapterFavorite)
+//                    adapterFavorite.notifyDataSetChanged()
+//                })
+//            rvFavorite.visibility = View.GONE
+//        }else{
+            db.showFavoriteAcara().getDaftarFav().observe(this,
+                Observer<List<FavoritePojo>> { dataFav ->
+                    adapterFavorite = FavoriteAdapter(dataFav)
+                    rvFavorite.setAdapter(adapterFavorite)
+                    adapterFavorite.notifyDataSetChanged()
+                })
+//                        }
+                     }
 
-    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {

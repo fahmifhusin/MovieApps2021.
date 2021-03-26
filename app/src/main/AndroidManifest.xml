@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.favorite.FavoriteActivity" />
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.intro.SplashScreen"
+        <activity android:name=".ui.main.SplashScreen"
             android:theme="@style/SplashIntro"
             tools:targetApi="24">
             <intent-filter>

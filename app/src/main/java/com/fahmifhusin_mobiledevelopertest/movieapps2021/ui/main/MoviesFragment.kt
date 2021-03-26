@@ -41,7 +41,7 @@ class MoviesFragment: Fragment() {
 
         val moviesViewModel = ViewModelProviders.of(this,
             context?.let { MoviesViewModelFactory(it) }).get(MoviesViewModel::class.java)
-        moviesViewModel.getMoviesViewData().observe(this,object: Observer<ArrayList<Results>> {
+        moviesViewModel.getMoviesViewData().observe(viewLifecycleOwner,object: Observer<ArrayList<Results>> {
             override fun onChanged(t: ArrayList<Results>) {
                 dataResult.clear()
                 t.let { dataResult.addAll(it) }

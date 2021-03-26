@@ -43,7 +43,7 @@ class SeriesFragment: Fragment() {
 
         val seriesViewModel = ViewModelProviders.of(this,
             context?.let { SeriesViewModelFactory(it) }).get(SeriesViewModel::class.java)
-        seriesViewModel.getSeriesViewData().observe(this,object: Observer<ArrayList<Results>> {
+        seriesViewModel.getSeriesViewData().observe(viewLifecycleOwner,object: Observer<ArrayList<Results>> {
             override fun onChanged(t: ArrayList<Results>) {
                 dataResult.clear()
                 t.let { dataResult.addAll(it) }

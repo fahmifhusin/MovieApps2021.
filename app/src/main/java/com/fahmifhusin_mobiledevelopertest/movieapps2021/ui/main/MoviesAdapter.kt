@@ -1,6 +1,7 @@
 package com.fahmifhusin_mobiledevelopertest.movieapps2021.ui.main
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,13 +37,13 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
             builder.setMessage(R.string.msg_add_favorite)
             builder.setPositiveButton(R.string.ya,
                 { dialog, which ->
-                    Toast.makeText(parent.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
                   db = Room.databaseBuilder(
-                    parent.context,
+                    parent.getContext(),
                     MovieAppDB::class.java, "movie_dua_satu"
                 ).allowMainThreadQueries().build()
                     val idParse = Integer.parseInt(dataMovie.getId())
-                        val dataFavBaru = FavoritePojo(
+                        val dataFavBaru =
+                            FavoritePojo(
                             idParse,
                             IMAGE_URL+dataMovie.getPoster(),
                             dataMovie.getTitle()!!,
@@ -52,6 +53,8 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
                             dataMovie.getOverView()!!
                         )
                         db.showFavoriteAcara().insertFav(dataFavBaru)
+                    Log.d("dataBaru", dataFavBaru.toString())
+                    Toast.makeText(parent.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
                 })
             builder.setNegativeButton(R.string.tidak,
                 { dialog, which ->
