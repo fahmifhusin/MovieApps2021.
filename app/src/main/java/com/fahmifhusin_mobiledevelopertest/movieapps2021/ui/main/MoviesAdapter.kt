@@ -20,6 +20,7 @@ import com.fahmifhusin_mobiledevelopertest.movieapps2021.data.rest.ApiClient.IMA
 class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView.Adapter<MoviesAdapter.DaftarMoviesHolder>() {
 
     lateinit var dataMovie:Results
+    lateinit var db:MovieAppDB
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,12 +37,11 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
             builder.setPositiveButton(R.string.ya,
                 { dialog, which ->
                     Toast.makeText(parent.context, R.string.msg_add_menu_continue, Toast.LENGTH_SHORT).show()
-//                    val db = Room.databaseBuilder(
-//                        parent.context,
-//                        MovieAppDB::class.java, "movie_app"
-//                    ).allowMainThreadQueries().build()
+                  db = Room.databaseBuilder(
+                    parent.context,
+                    MovieAppDB::class.java, "movie_dua_satu"
+                ).allowMainThreadQueries().build()
                     val idParse = Integer.parseInt(dataMovie.getId())
-                    try{
                         val dataFavBaru = FavoritePojo(
                             idParse,
                             IMAGE_URL+dataMovie.getPoster(),
@@ -51,11 +51,7 @@ class MoviesAdapter(private var listMovies: MutableList<Results>) : RecyclerView
                             dataMovie.getRelease()!!,
                             dataMovie.getOverView()!!
                         )
-//                        db.showFavoriteAcara().insertMenuBaru(dataFavBaru)
-                    }catch (e:Exception){
-                        Toast.makeText(parent.context,R.string.msg_abort_add_dialog, Toast.LENGTH_SHORT).show()
-                    }
-
+                        db.showFavoriteAcara().insertFav(dataFavBaru)
                 })
             builder.setNegativeButton(R.string.tidak,
                 { dialog, which ->
